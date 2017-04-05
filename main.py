@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 
 EMPTY = 0
+EMPTY_CHAR = "."
 MINE  = "M"
 COVER = "C"
 
@@ -30,7 +31,7 @@ class MineBoard():
 
     def showBoard(self, isAll=False):
         if isAll:
-            print "\n".join(" ".join(str(c) for c in row) for row in self.board)
+            print "\n".join(" ".join(str(c if c != EMPTY else EMPTY_CHAR) for c in row) for row in self.board)
         else:
             for y in range(self.height):
                 row = ""
@@ -38,7 +39,7 @@ class MineBoard():
                     if self.cover[y][x]:
                         row += COVER
                     else:
-                        row += str(self.board[y][x])
+                        row += str(self.board[y][x] if self.board[y][x] != EMPTY else EMPTY_CHAR)
 
                 print " ".join(row)
 
